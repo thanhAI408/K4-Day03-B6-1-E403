@@ -1,0 +1,7 @@
+{
+  "name": "t-shirt-agent-lab-ui",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Node.js dashboard for testing the chatbot and ReAct agent lab",
+  "scripts": { "start": "node server.js" }
+}

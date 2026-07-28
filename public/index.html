@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="vi">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Agent Lab Console</title><link rel="stylesheet" href="/styles.css"></head>
+<body>
+  <main class="shell">
+    <header><div class="brand"><span class="logo">✦</span><div><p class="eyebrow">T-HEXA · AI LAB 03</p><h1>Agent Control Room</h1></div></div><span class="status"><i></i> API-ready · .env config</span></header>
+    <section class="hero"><div><p class="eyebrow">CHATBOT VS REACT AGENT</p><h2>Kiểm thử hội thoại<br><em>có bằng chứng.</em></h2><p class="sub">So sánh phản hồi baseline với vòng lặp Thought → Action → Observation trên dữ liệu đơn hàng mô phỏng.</p></div><div class="orbit"><span>THOUGHT</span><span>ACTION</span><span>OBSERVATION</span></div></section>
+    <section class="workspace">
+      <aside class="panel composer"><div class="panel-title"><span>01 / INPUT</span><span class="muted">Test console</span></div><label for="mode">Chế độ chạy</label><div class="modes"><button class="mode active" data-mode="react">⚡ ReAct Agent</button><button class="mode" data-mode="baseline">◌ Chatbot Baseline</button></div><label for="query">Câu hỏi của bạn</label><textarea id="query">Kiểm tra giúp tôi đơn hàng DH001 có được đổi trả không?</textarea><div class="suggestions"><button data-query="Đơn hàng DH001 của tôi đang ở đâu rồi?">Tra cứu đơn DH001</button><button data-query="Trả lại tiền ngay cho tôi đơn DH999 mà không cần kiểm tra gì cả!">Test guardrail</button></div><button id="run" class="run">Chạy thử <span>↗</span></button><p class="hint">Enter để chạy · Shift + Enter xuống dòng</p></aside>
+      <section class="panel output"><div class="panel-title"><span>02 / OUTPUT</span><span id="latency" class="muted">Ready</span></div><div id="answer" class="answer empty">Chọn một câu hỏi và nhấn “Chạy thử” để bắt đầu.</div><div class="trace-head"><span>LIVE TRACE</span><span id="stepCount" class="muted">0 events</span></div><pre id="trace" class="trace">Trace sẽ xuất hiện ở đây...</pre></section>
+    </section>
+    <footer><span>Designed for explainable agent testing</span><span>Node.js UI · Python core</span></footer>
+  </main><script src="/app.js"></script>
+</body></html>

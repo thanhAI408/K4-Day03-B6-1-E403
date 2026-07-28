@@ -71,3 +71,20 @@ timeline
 
 > 🚀 **BẮT ĐẦU LÀM BÀI**:
 > Vui lòng mở sổ tay thực hành 👉 **[PHAN_CONG_CONG_VIEC.md](file:///c:/Users/Admin/Documents/VinUni/LabCoachVin/LabKeyCoach/Day-3-Lab-Chatbot-vs-react-agent-E402/docs/PHAN_CONG_CONG_VIEC.md)** để xem phân vai và checklist công việc cụ thể cho từng thành viên!
+## Giao diện Node.js để test trực tiếp
+
+Chạy giao diện tại thư mục gốc dự án:
+
+```powershell
+node server.js
+```
+
+Mở `http://localhost:3000`. Mặc định giao diện dùng MockProvider offline. Để dùng API thật giá rẻ, ví dụ OpenAI GPT-4o mini, cấu hình trong `.env`:
+
+```env
+LLM_PROVIDER=openai
+LLM_MODEL=gpt-4o-mini
+OPENAI_API_KEY=your_key_here
+```
+
+Giao diện gọi trực tiếp Python core qua `src/ui_bridge.py`, nên vẫn kiểm tra được Chatbot Baseline, ReAct Agent, Observation và Guardrail. Không commit file `.env`.
