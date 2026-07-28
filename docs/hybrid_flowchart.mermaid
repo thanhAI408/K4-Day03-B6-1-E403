@@ -1,0 +1,66 @@
+flowchart TD
+    %% ============================================================
+    %% SƠ ĐỒ LUỒNG HYBRID: CHATBOT BASELINE VS REACT AGENT (MỐC 4)
+    %% Trợ Lý Tra Cứu Đơn Hàng & Xử Lý Đổi Trả
+    %% ============================================================
+
+    Start(["📥 Yêu cầu từ Khách hàng"]) --> Router{"🔀 Phân loại Ý định (Router / Intent Classifier)"}
+
+    %% ------------------------------------------------------------
+    %% LUỒNG 1: CHATBOT BASELINE (Câu hỏi đơn giản / Kiến thức chung)
+    %% ------------------------------------------------------------
+    subgraph BaselinePath ["💬 LUỒNG 1: CHATBOT BASELINE (Không dùng Tool)"]
+        Router -- "Câu hỏi chung / Chính sách tổng quát\n(VD: Thời hạn đổi trả chung, câu hỏi tư vấn)" --> PromptBaseline["⚙️ Nạp CHATBOT_BASELINE_PROMPT\n(Quy định chính sách 30 ngày / 7 ngày)"]
+        PromptBaseline --> LLMBaseline["🤖 LLM Sinh phản hồi trực tiếp"]
+        LLMBaseline --> AnswerBaseline["💬 Trả lời trực tiếp cho Khách hàng"]
+    end
+
+    %% ------------------------------------------------------------
+    %% LUỒNG 2: REACT AGENT (Câu hỏi cần dữ liệu thực tế / Thao tác)
+    %% ------------------------------------------------------------
+    subgraph ReActPath ["🧠 LUỒNG 2: REACT AGENT LOOP (Có Tool & Phanh An Toàn)"]
+        Router -- "Tra cứu mã đơn / Vận chuyển / Đổi trả / Hủy đơn\n(VD: Tra cứu DH001, hủy đơn, tính hoàn tiền)" --> StepInit["🔄 Khởi tạo ReAct Loop (Step = 1, Max = 6)"]
+        
+        StepInit --> LLMReAct["🧠 LLM Suy luận (Thought) & Đề xuất (Action)"]
+        
+        LLMReAct --> ParseAction{"🔍 Parser Action & Kiểm tra Guardrails"}
+        
+        %% Nhánh Guardrail Vi phạm
+        ParseAction -- "❌ Bẫy Lặp Action / Thiếu Mã Đơn / Quá Max Step" --> TriggerGuardrail["🛡️ GUARDRAIL TRIGGERED\n(Ngắt lặp an toàn / Từ chối bịa đặt)"]
+        TriggerGuardrail --> EscalateOrReject["⚠️ Thông báo lý do từ chối hoặc\nChuyển Nhân viên Hỗ trợ"]
+
+        %% Nhánh Action Cần Xác Nhận
+        ParseAction -- "⚠️ Hành động nhạy cảm\n(Hủy đơn / Tạo đổi trả)" --> ConfirmCheck{"Hỏi người dùng đã xác nhận chưa?"}
+        ConfirmCheck -- "Chưa xác nhận" --> AskUserConfirm["❓ Yêu cầu người dùng xác nhận rõ ràng trước"]
+        ConfirmCheck -- "Đã xác nhận" --> ExecTool
+
+        %% Nhánh Hợp lệ -> Thực thi Tool
+        ParseAction -- "✅ Action hợp lệ & An toàn" --> ExecTool["🛠️ Thực thi Tool trong AVAILABLE_TOOLS\n(tra_cuu_don_hang, kiem_tra_dieu_kien_doi_tra...)"]
+        
+        ExecTool --> Obs["👁️ Thu nhận Observation từ Hệ thống / Database"]
+        Obs --> StepCheck{"Đã đạt kết quả cuối cùng hoặc Đủ dữ liệu?"}
+
+        StepCheck -- "Chưa đủ ➔ Tăng Step + 1" --> LLMReAct
+        StepCheck -- "Đã đủ ➔ Sinh Final Answer" --> FinalAnswer["🏁 Final Answer hoàn chỉnh dựa trên Observation"]
+    end
+
+    %% Kết thút luồng
+    AnswerBaseline --> End(["✅ Hoàn tất hỗ trợ"])
+    AskUserConfirm --> End
+    EscalateOrReject --> End
+    FinalAnswer --> End
+
+    %% ------------------------------------------------------------
+    %% STYLING / THẦM MỸ
+    %% ------------------------------------------------------------
+    classDef startStyle fill:#2b5c8f,stroke:#1a365d,stroke-width:2px,color:#fff;
+    classDef routerStyle fill:#8c52ff,stroke:#5e2ca5,stroke-width:2px,color:#fff;
+    classDef baselineStyle fill:#2d8a4e,stroke:#1b542e,stroke-width:2px,color:#fff;
+    classDef reactStyle fill:#d97706,stroke:#92400e,stroke-width:2px,color:#fff;
+    classDef guardStyle fill:#dc2626,stroke:#991b1b,stroke-width:2px,color:#fff;
+
+    class Start,End startStyle;
+    class Router routerStyle;
+    class PromptBaseline,LLMBaseline,AnswerBaseline baselineStyle;
+    class StepInit,LLMReAct,ExecTool,Obs,FinalAnswer reactStyle;
+    class TriggerGuardrail,EscalateOrReject,ConfirmCheck guardStyle;
