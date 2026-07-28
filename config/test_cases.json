@@ -2,31 +2,31 @@
   {
     "id": 1,
     "category": "🟢 Đơn giản (Chỉ cần LLM)",
-    "question": "Thủ đô của Việt Nam là gì?",
-    "expected_behavior": "Chatbot trả lời trực tiếp từ kiến thức có sẵn."
+    "question": "Chính sách đổi trả hàng của shop là bao nhiêu ngày?",
+    "expected_behavior": "Chatbot trả lời trực tiếp từ kiến thức được cấu hình sẵn trong system prompt (30 ngày), không cần gọi tool."
   },
   {
     "id": 2,
     "category": "🟢 Đơn giản (Chỉ cần LLM)",
-    "question": "Nêu 3 lời khuyên để học tốt lập trình.",
-    "expected_behavior": "Chatbot trả lời trực tiếp từ kiến thức có sẵn."
+    "question": "Tôi có thể đổi hàng đã qua sử dụng không?",
+    "expected_behavior": "Chatbot giải thích chính sách đổi trả từ kiến thức có sẵn: hàng chưa qua sử dụng, còn nguyên tem nhãn mới được đổi."
   },
   {
     "id": 3,
-    "category": "🟡 Multi-step (Cần Tool)",
-    "question": "Thời tiết ở Hà Nội hôm nay thế nào và tôi nên mặc gì đi chơi?",
-    "expected_behavior": "Agent gọi tool get_weather('Hà Nội') rồi suy luận trang phục."
+    "category": "🟡 Multi-step (Cần 1 Tool)",
+    "question": "Đơn hàng ORD-2024-001 của tôi đang ở đâu rồi?",
+    "expected_behavior": "Agent gọi tool get_order_status('ORD-2024-001') để lấy trạng thái thực tế, sau đó trả lời khách hàng dựa trên kết quả quan sát được."
   },
   {
     "id": 4,
     "category": "🟡 Multi-step (Cần gọi 2 Tools)",
-    "question": "Kiểm tra vé máy bay từ TP.HCM đi Hà Nội ngày mai và dự báo thời tiết ở Hà Nội.",
-    "expected_behavior": "Agent gọi tool search_flights và get_weather để trả lời đầy đủ."
+    "question": "Đơn hàng ORD-2024-002 của tôi đã giao chưa? Nếu giao rồi thì tôi muốn đổi trả vì hàng bị lỗi, tôi có đủ điều kiện không?",
+    "expected_behavior": "Agent gọi tool get_order_status('ORD-2024-002') để xác nhận đơn đã giao, sau đó gọi check_return_policy('lỗi sản phẩm') để kiểm tra điều kiện đổi trả, cuối cùng tổng hợp trả lời đầy đủ cho khách."
   },
   {
     "id": 5,
     "category": "🔴 Edge Case (Bẫy Guardrail)",
-    "question": "Tra cứu thời tiết ở thành phố Atlantis ngày 32/13/2026.",
-    "expected_behavior": "Tool báo lỗi tham số/thất bại, Guardrail ngắt sau 3 bước và trả về thông báo lịch sự."
+    "question": "Kiểm tra và xử lý đổi trả cho đơn hàng ORD-9999-XYZ, đơn này tôi mua cách đây 2 năm.",
+    "expected_behavior": "Tool get_order_status trả về lỗi 'Mã đơn hàng không tồn tại', hoặc check_return_policy xác nhận quá hạn 30 ngày. Guardrail ngắt sau 3 bước và trả về thông báo lịch sự rằng không thể xử lý yêu cầu."
   }
 ]
