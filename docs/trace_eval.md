@@ -3,15 +3,21 @@
 
 ---
 
-## 🎯 1. BẢNG CHẤM ĐIỂM AGENTIC FIT (SCORING MATRIX)
+## 📌 CHỦ ĐỀ BÀI TOÁN (Role 1 & Cả nhóm thống nhất)
+> **Đề tài được chọn**: **Đề tài 5 - Trợ Lý Tra Cứu Đơn Hàng & Xử Lý Đổi Trả (Order Tracking & Returns Assistant)**
+> **Thành viên đảm nhận (Role 1 & Role 5)**: Pham Quoc Bao
 
-| Tiêu chí | Điểm (1-5) | Lý do đánh giá |
+---
+
+## 🎯 1. BẢNG CHẤM ĐIỂM AGENTIC FIT (SCORING MATRIX - MỐC 1)
+
+| Tiêu chí | Điểm (1-5) | Lý do đánh giá chi tiết |
 | :--- | :---: | :--- |
-| 🧠 **Multi-step Reasoning** | `4/5` | Cần suy luận từ tra cứu thời tiết đến chọn trang phục. |
-| 🛠️ **Tool Interaction** | `5/5` | Cần tra cứu dữ liệu thời gian thực qua API thời tiết/chuyến bay. |
-| 🔀 **Dynamic Decision** | `4/5` | Kết quả bước trước quyết định hành động bước sau. |
-| ⏳ **Long Horizon** | `3/5` | Quy trình gồm 2-3 bước xử lý ngắn. |
-| **TỔNG ĐIỂM FIT** | **16/20** | **KẾT LUẬN: BÀI TOÁN RẤT NÊN DÙNG REACT AGENT!** |
+| 🧠 **Multi-step Reasoning** | `4/5` | Cần suy luận qua chuỗi bước: Tra cứu trạng thái đơn hàng -> Kiểm tra điều kiện chính sách đổi trả -> Gọi API xử lý đổi trả/hoàn tiền. |
+| 🛠️ **Tool Interaction** | `5/5` | Bắt buộc gọi các công cụ hệ thống (`get_order_status`, `check_return_policy`, `process_return`) để lấy dữ liệu thực tế từ cơ sở dữ liệu kho/đơn hàng. |
+| 🔀 **Dynamic Decision** | `4/5` | Quyết định bước tiếp theo phụ thuộc vào trạng thái đơn hàng (Đã giao/Đang giao) và lý do đổi trả của khách hàng. |
+| ⏳ **Long Horizon** | `3/5` | Quy trình gồm 2 - 4 bước ReAct liên tiếp cho từng yêu cầu. |
+| **TỔNG ĐIỂM FIT** | **16/20** | **KẾT LUẬN: BÀI TOÁN RẤT NÊN DÙNG REACT AGENT!** (Vượt ngưỡng 12/20) |
 
 ---
 
