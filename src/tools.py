@@ -3,6 +3,7 @@
 Nơi khai báo tất cả các "món đồ nghề" mà ReAct Agent có thể gọi.
 """
 from datetime import datetime, timedelta
+import functools
 
 # ============================================================
 # MOCK DATABASE (thay bằng gọi API/DB thật khi tích hợp)
@@ -294,8 +295,24 @@ def gui_thong_bao_xac_nhan(kenh: str, noi_dung: str) -> str:
     return f"Đã gửi thông báo qua {kenh}: \"{noi_dung}\""
 
 
+def safe_tool(func):
+    """
+    Bọc một tool function: nếu bên trong ném exception bất kỳ (KeyError, AttributeError,
+    ValueError khi parse ngày tháng, v.v.) thì bắt lại và trả về chuỗi "LỖI: ..." thay vì
+    để exception lan lên làm crash vòng lặp ReAct của agent.
+    """
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        try:
+            return func(*args, **kwargs)
+        except Exception as e:
+            return f"LỖI: Tool '{func.__name__}' gặp sự cố khi thực thi ({type(e).__name__}: {e})."
+    return wrapper
+
+
 # Danh sách các tool được đăng ký để Agent sử dụng
-AVAILABLE_TOOLS = {
+# (mỗi tool được bọc qua safe_tool để đảm bảo luôn trả về string, không bao giờ crash)
+_RAW_TOOLS = {
     "tra_cuu_don_hang": tra_cuu_don_hang,
     "tra_cuu_don_hang_theo_khach_hang": tra_cuu_don_hang_theo_khach_hang,
     "tra_cuu_van_chuyen": tra_cuu_van_chuyen,
@@ -309,6 +326,7 @@ AVAILABLE_TOOLS = {
     "chuyen_nhan_vien_ho_tro": chuyen_nhan_vien_ho_tro,
     "gui_thong_bao_xac_nhan": gui_thong_bao_xac_nhan,
 }
+AVAILABLE_TOOLS = {name: safe_tool(fn) for name, fn in _RAW_TOOLS.items()}
 
 
 """
