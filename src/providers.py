@@ -28,10 +28,7 @@ class GeminiProvider(BaseLLMProvider):
     """Google Gemini Provider"""
     def __init__(self, api_key: str = None, model: str = None):
         self.api_key = api_key or os.getenv("GEMINI_API_KEY")
-        selected_model = model or os.getenv("LLM_MODEL") or "gemini-2.5-flash"
-        if selected_model == "gemini-2.5-flash":
-            selected_model = "gemini-1.5-flash"
-        self.model_name = selected_model
+        self.model_name = model or os.getenv("LLM_MODEL") or "gemini-2.5-flash"
         
     def generate(self, prompt: str, system_prompt: str = "") -> str:
         if not self.api_key or self.api_key == "your_gemini_api_key_here":
@@ -105,7 +102,7 @@ class OpenRouterProvider(BaseLLMProvider):
     """OpenRouter Provider (Hỗ trợ gọi mọi model qua OpenRouter API)"""
     def __init__(self, api_key: str = None, model: str = None):
         self.api_key = api_key or os.getenv("OPENROUTER_API_KEY")
-        self.model_name = model or os.getenv("LLM_MODEL") or "google/gemini-2.5-flash"
+        self.model_name = model or os.getenv("LLM_MODEL") or "google/gemini-3.1-flash"
         
     def generate(self, prompt: str, system_prompt: str = "") -> str:
         if not self.api_key or self.api_key == "your_openrouter_api_key_here":
