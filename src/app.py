@@ -1124,28 +1124,23 @@ def run_react_agent(
 # CHỌN TEST CASE PHÙ HỢP
 # =============================================================================
 
+import random
+
 def choose_sample_query(
     tests: list[dict[str, Any]],
 ) -> str:
     """
-    Chọn test case phù hợp với đề tài đơn hàng.
-
-    Nếu file test case vẫn còn dữ liệu cũ,
-    dùng câu hỏi mặc định.
+    Chọn ngẫu nhiên 1 test case từ bộ test_cases.json mỗi lần chạy.
     """
+    valid_candidates = []
     for test_case in tests:
         question = test_case.get("question", "")
 
-        if not isinstance(question, str):
-            continue
+        if isinstance(question, str) and question.strip():
+            valid_candidates.append(question)
 
-        if (
-            extract_order_id(question)
-            or extract_shipping_id(question)
-            or extract_return_request_id(question)
-            or extract_product_id(question)
-        ):
-            return question
+    if valid_candidates:
+        return random.choice(valid_candidates)
 
     return (
         "Kiểm tra giúp tôi đơn hàng DH001 "

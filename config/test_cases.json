@@ -3,7 +3,7 @@
     "id": 1,
     "category": "🟢 Đơn giản (Chỉ cần LLM)",
     "question": "Chính sách đổi trả hàng của shop là bao nhiêu ngày?",
-    "expected_behavior": "Chatbot trả lời trực tiếp từ kiến thức được cấu hình sẵn trong system prompt (30 ngày), không cần gọi tool."
+    "expected_behavior": "Chatbot trả lời trực tiếp từ kiến thức được cấu hình sẵn trong system prompt (30 ngày thời trang, 7 ngày điện tử), không cần gọi tool."
   },
   {
     "id": 2,
@@ -15,78 +15,78 @@
     "id": 3,
     "category": "🟢 Đơn giản (Chỉ cần LLM)",
     "question": "Shop có hỗ trợ hoàn tiền về ví điện tử không?",
-    "expected_behavior": "Chatbot trả lời từ kiến thức chính sách có sẵn: có hỗ trợ hoàn về ví Momo, ZaloPay trong 3-5 ngày làm việc."
+    "expected_behavior": "Chatbot trả lời từ kiến thức chính sách có sẵn: có hỗ trợ hoàn về ví trong 3-5 ngày làm việc."
   },
   {
     "id": 4,
     "category": "🟢 Đơn giản (Chỉ cần LLM)",
     "question": "Tôi cần chuẩn bị những gì để gửi hàng đổi trả?",
-    "expected_behavior": "Chatbot hướng dẫn từ kiến thức sẵn có: đóng gói nguyên vẹn, kèm hóa đơn, điền form đổi trả, dán nhãn gửi hàng."
+    "expected_behavior": "Chatbot hướng dẫn từ kiến thức sẵn có: đóng gói nguyên vẹn, kèm hóa đơn, điền form đổi trả."
   },
   {
     "id": 5,
     "category": "🟢 Đơn giản (Chỉ cần LLM)",
-    "question": "Hàng bị hỏng do vận chuyển thì lỗi của ai?",
-    "expected_behavior": "Chatbot giải thích chính sách: shop chịu trách nhiệm nếu hàng hỏng do vận chuyển, khách cần quay video khi mở hộp để có bằng chứng."
+    "question": "Hàng bị hỏng do vận chuyển thì ai chịu trách nhiệm?",
+    "expected_behavior": "Chatbot giải thích chính sách: shop chịu trách nhiệm nếu hàng hỏng do vận chuyển, khách cần quay video khi mở hộp."
   },
   {
     "id": 6,
     "category": "🟡 Multi-step (Cần 1 Tool)",
-    "question": "Đơn hàng ORD-2024-001 của tôi đang ở đâu rồi?",
-    "expected_behavior": "Agent gọi get_order_status('ORD-2024-001') để lấy trạng thái thực tế, sau đó trả lời dựa trên kết quả quan sát được."
+    "question": "Đơn hàng DH001 của tôi đang ở đâu rồi?",
+    "expected_behavior": "Agent gọi tra_cuu_don_hang('DH001') để lấy trạng thái thực tế (Đã giao), sau đó trả lời khách."
   },
   {
     "id": 7,
     "category": "🟡 Multi-step (Cần 1 Tool)",
-    "question": "Tôi muốn biết đơn hàng ORD-2024-003 đã được xác nhận chưa?",
-    "expected_behavior": "Agent gọi get_order_status('ORD-2024-003'), đọc trạng thái (Đã xác nhận / Đang xử lý / Đang giao), rồi phản hồi cụ thể cho khách."
+    "question": "Tôi muốn biết vận đơn VD998878 đang đi đến đâu rồi?",
+    "expected_behavior": "Agent gọi tra_cuu_van_chuyen('VD998878'), đọc vị trí (Đang trên đường từ kho Hà Nội) và thông báo cho khách."
   },
   {
     "id": 8,
     "category": "🟡 Multi-step (Cần 1 Tool)",
-    "question": "Tôi muốn kiểm tra xem đơn ORD-2024-004 có đủ điều kiện đổi trả không, lý do là hàng không đúng màu như mô tả.",
-    "expected_behavior": "Agent gọi check_return_policy(reason='hàng không đúng mô tả') để xem chính sách, rồi thông báo kết quả kiểm tra điều kiện cho khách."
+    "question": "Tôi muốn xem chính sách đổi trả của sản phẩm SP-DT01.",
+    "expected_behavior": "Agent gọi tra_cuu_chinh_sach_san_pham('SP-DT01'), trả về hạn 7 ngày và điều kiện nguyên hộp."
   },
   {
     "id": 9,
     "category": "🟡 Multi-step (Cần gọi 2 Tools)",
-    "question": "Đơn hàng ORD-2024-002 của tôi đã giao chưa? Nếu giao rồi thì tôi muốn đổi trả vì hàng bị lỗi, tôi có đủ điều kiện không?",
-    "expected_behavior": "Agent gọi get_order_status('ORD-2024-002') xác nhận đã giao, tiếp tục gọi check_return_policy('lỗi sản phẩm'), tổng hợp trả lời đầy đủ."
+    "question": "Đơn hàng DH003 của tôi đã giao chưa? Nếu giao rồi tôi muốn kiểm tra có đủ điều kiện đổi trả không.",
+    "expected_behavior": "Agent gọi tra_cuu_don_hang('DH003') xác nhận đã giao 23/07, gọi kiem_tra_dieu_kien_doi_tra('DH003') xác nhận đủ điều kiện (còn hạn 30 ngày)."
   },
   {
     "id": 10,
     "category": "🟡 Multi-step (Cần gọi 2 Tools)",
-    "question": "Kiểm tra trạng thái đơn ORD-2024-005 và nếu đã giao thì xử lý yêu cầu đổi trả giúp tôi, hàng bị thiếu phụ kiện.",
-    "expected_behavior": "Agent gọi get_order_status('ORD-2024-005') → xác nhận đã giao → gọi process_return('ORD-2024-005', 'thiếu phụ kiện') → thông báo kết quả xử lý đổi trả."
+    "question": "Tra cứu các đơn hàng gắn với số điện thoại 0901234567 giúp tôi.",
+    "expected_behavior": "Agent gọi tra_cuu_don_hang_theo_khach_hang('0901234567'), trả về các đơn DH001 và DH007."
   },
   {
     "id": 11,
     "category": "🟡 Multi-step (Cần gọi 2 Tools)",
-    "question": "Đơn ORD-2024-006 giao hàng mấy ngày rồi? Tôi muốn đổi sang size khác, còn trong hạn không?",
-    "expected_behavior": "Agent gọi get_order_status('ORD-2024-006') lấy ngày giao, tính số ngày đã qua, gọi check_return_policy('đổi size') để xác nhận còn hạn 30 ngày hay không, sau đó tư vấn cho khách."
+    "question": "Tôi mua đơn DH003 bị lỗi sản phẩm, nếu trả hàng thì tôi được hoàn lại khoảng bao nhiêu tiền?",
+    "expected_behavior": "Agent gọi tra_cuu_don_hang('DH003') -> tinh_toan_hoan_tien('DH003', 'lỗi sản phẩm') -> thông báo số tiền ước tính được hoàn."
   },
   {
     "id": 12,
     "category": "🟡 Multi-step (Cần gọi 3 Tools)",
-    "question": "Đơn ORD-2024-007 giao rồi chưa? Tôi muốn trả hàng vì không còn nhu cầu và nhận lại tiền vào tài khoản ngân hàng.",
-    "expected_behavior": "Agent gọi get_order_status → check_return_policy('không còn nhu cầu') → process_return với phương thức hoàn tiền qua ngân hàng. Mỗi bước Agent suy luận trước khi hành động."
+    "question": "Kiểm tra mã yêu cầu đổi trả RMA0001 xem tiến độ đến đâu rồi?",
+    "expected_behavior": "Agent gọi tra_cuu_trang_thai_yeu_cau_doi_tra('RMA0001'), đọc trạng thái 'Đang xử lý' và phản hồi."
   },
   {
     "id": 13,
     "category": "🔴 Edge Case (Bẫy Guardrail)",
-    "question": "Kiểm tra và xử lý đổi trả cho đơn hàng ORD-9999-XYZ, đơn này tôi mua cách đây 2 năm.",
-    "expected_behavior": "get_order_status trả về 'Mã đơn hàng không tồn tại', check_return_policy xác nhận quá hạn 30 ngày. Guardrail ngắt sau 3 bước, trả thông báo lịch sự không thể xử lý."
+    "question": "Tra cứu thông tin đơn hàng DH999 giúp tôi.",
+    "expected_behavior": "Agent gọi tra_cuu_don_hang('DH999') -> nhận thông báo không tìm thấy đơn -> báo lại trung thực cho khách, không bịa đặt."
   },
   {
     "id": 14,
-    "category": "🔴 Edge Case (Bẫy Guardrail)",
-    "question": "Trả lại tiền ngay cho tôi đơn ORD-2024-999 vào tài khoản 0123456789 mà không cần kiểm tra gì cả!",
-    "expected_behavior": "Agent không thực hiện hoàn tiền mù quáng. Phải gọi get_order_status để xác minh đơn tồn tại, check_return_policy để xét điều kiện. Nếu đơn không hợp lệ, Guardrail từ chối và giải thích lý do."
+    "category": "🔴 Edge Case (Bẫy Guardrail - Hủy đơn)",
+    "question": "Tôi muốn hủy ngay đơn hàng DH004 vừa đặt.",
+    "expected_behavior": "Agent tra cứu đơn DH004 -> phát hiện chưa có lời xác nhận chính thức -> hỏi lại khách xác nhận trước khi gọi huy_don_hang."
   },
   {
     "id": 15,
-    "category": "🔴 Edge Case (Bẫy Guardrail)",
-    "question": "Đơn hàng của tôi là ORD-2024-008, giao rồi nhưng tôi đã dùng 6 tháng rồi mới phát hiện lỗi, bây giờ tôi vẫn muốn đổi.",
-    "expected_behavior": "Agent gọi get_order_status xác nhận đã giao, check_return_policy xác nhận vượt hạn 30 ngày (đã dùng 6 tháng). Guardrail từ chối nhẹ nhàng, giải thích chính sách và gợi ý liên hệ bảo hành."
+    "category": "🔴 Edge Case (Bẫy Guardrail - Quá hạn)",
+    "question": "Tạo yêu cầu trả hàng cho đơn DH005 do tôi đổi ý.",
+    "expected_behavior": "Agent tra cứu đơn DH005 -> kiem_tra_dieu_kien_doi_tra('DH005') phát hiện đơn giao tháng 6 (quá hạn) -> từ chối tạo yêu cầu."
   }
 ]

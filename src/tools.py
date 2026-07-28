@@ -30,15 +30,127 @@ MOCK_ORDERS_DB = {
         "tong_tien": 398000,
         "ma_van_don": "VD998878",
     },
+    "DH003": {
+        "khach_hang": "Lê Văn C",
+        "sdt": "0933333333",
+        "trang_thai": "Đã giao",
+        "ngay_dat": "2026-07-20",
+        "ngay_giao": "2026-07-23",
+        "san_pham": [
+            {"ma": "SP-TT03", "ten": "Váy đầm Hàn Quốc", "gia": 450000, "so_luong": 1},
+            {"ma": "SP-TT02", "ten": "Áo thun Cotton", "gia": 199000, "so_luong": 1},
+        ],
+        "tong_tien": 649000,
+        "ma_van_don": "VD111222",
+    },
+    "DH004": {
+        "khach_hang": "Phạm Thị D",
+        "sdt": "0944444444",
+        "trang_thai": "Chờ xác nhận",
+        "ngay_dat": "2026-07-28",
+        "ngay_giao": None,
+        "san_pham": [{"ma": "SP-DT02", "ten": "Sạc dự phòng 20000mAh", "gia": 350000, "so_luong": 1}],
+        "tong_tien": 350000,
+        "ma_van_don": None,
+    },
+    "DH005": {
+        "khach_hang": "Hoàng Văn E",
+        "sdt": "0955555555",
+        "trang_thai": "Đã giao",
+        "ngay_dat": "2026-06-01",
+        "ngay_giao": "2026-06-04",
+        "san_pham": [{"ma": "SP-DT03", "ten": "Đồng hồ thông minh SmartWatch Z", "gia": 1200000, "so_luong": 1}],
+        "tong_tien": 1200000,
+        "ma_van_don": "VD555666",
+    },
+    "DH006": {
+        "khach_hang": "Đỗ Thị F",
+        "sdt": "0966666666",
+        "trang_thai": "Đã hủy",
+        "ngay_dat": "2026-07-22",
+        "ngay_giao": None,
+        "san_pham": [{"ma": "SP-GD01", "ten": "Nồi cơm điện 1.8L", "gia": 680000, "so_luong": 1}],
+        "tong_tien": 680000,
+        "ma_van_don": None,
+    },
+    "DH007": {
+        "khach_hang": "Vũ Văn G",
+        "sdt": "0901234567",  # Trùng SDT với DH001 — để test tra cứu theo SĐT
+        "trang_thai": "Đã giao",
+        "ngay_dat": "2026-07-26",
+        "ngay_giao": "2026-07-28",
+        "san_pham": [{"ma": "SP-TT02", "ten": "Áo thun Cotton", "gia": 199000, "so_luong": 3}],
+        "tong_tien": 597000,
+        "ma_van_don": "VD777888",
+    },
+    "DH008": {
+        "khach_hang": "Bùi Thị H",
+        "sdt": "0988888888",
+        "trang_thai": "Đang giao",
+        "ngay_dat": "2026-07-27",
+        "ngay_giao": None,
+        "san_pham": [
+            {"ma": "SP-DT01", "ten": "Tai nghe Bluetooth X1", "gia": 590000, "so_luong": 1},
+            {"ma": "SP-DT02", "ten": "Sạc dự phòng 20000mAh", "gia": 350000, "so_luong": 1},
+        ],
+        "tong_tien": 940000,
+        "ma_van_don": "VD888999",
+    },
 }
 
 MOCK_PRODUCT_POLICY = {
-    "SP-DT01": {"loai": "Điện tử", "han_doi_tra_ngay": 7, "dieu_kien": "Chỉ áp dụng nếu lỗi do NSX, còn nguyên hộp"},
-    "SP-TT02": {"loai": "Thời trang", "han_doi_tra_ngay": 30, "dieu_kien": "Chưa qua sử dụng, còn tem mác"},
+    "SP-DT01": {
+        "loai": "Điện tử",
+        "han_doi_tra_ngay": 7,
+        "dieu_kien": "Chỉ áp dụng nếu lỗi do NSX, còn nguyên hộp",
+    },
+    "SP-DT02": {
+        "loai": "Điện tử",
+        "han_doi_tra_ngay": 7,
+        "dieu_kien": "Lỗi kỹ thuật từ nhà sản xuất, còn nguyên seal",
+    },
+    "SP-DT03": {
+        "loai": "Điện tử cao cấp",
+        "han_doi_tra_ngay": 14,
+        "dieu_kien": "Lỗi NSX, còn hộp và phụ kiện đầy đủ",
+    },
+    "SP-TT02": {
+        "loai": "Thời trang",
+        "han_doi_tra_ngay": 30,
+        "dieu_kien": "Chưa qua sử dụng, còn tem mác",
+    },
+    "SP-TT03": {
+        "loai": "Thời trang cao cấp",
+        "han_doi_tra_ngay": 30,
+        "dieu_kien": "Chưa qua sử dụng, còn nguyên tem và túi đựng",
+    },
+    "SP-GD01": {
+        "loai": "Gia dụng",
+        "han_doi_tra_ngay": 7,
+        "dieu_kien": "Lỗi NSX, còn nguyên hộp và phụ kiện",
+    },
 }
 
-MOCK_RETURN_REQUESTS = {}  # ma_yeu_cau -> {...}
-_return_counter = 0
+MOCK_SHIPPING_DB = {
+    "VD998877": {"trang_thai": "Đã giao", "don_vi": "Giao Hàng Nhanh", "vi_tri": "Đã giao cho người nhận"},
+    "VD998878": {"trang_thai": "Đang vận chuyển", "don_vi": "Giao Hàng Nhanh", "vi_tri": "Đang trên đường từ kho Hà Nội"},
+    "VD111222": {"trang_thai": "Đã giao", "don_vi": "GHTK", "vi_tri": "Đã giao cho người nhận"},
+    "VD555666": {"trang_thai": "Đã giao", "don_vi": "J&T Express", "vi_tri": "Đã giao cho người nhận"},
+    "VD777888": {"trang_thai": "Đã giao", "don_vi": "Giao Hàng Nhanh", "vi_tri": "Đã giao cho người nhận ngày 28/07"},
+    "VD888999": {"trang_thai": "Đang phân loại", "don_vi": "J&T Express", "vi_tri": "Đang ở bưu cục Đống Đa - Hà Nội"},
+}
+
+MOCK_RETURN_REQUESTS = {
+    "RMA0001": {
+        "ma_don_hang": "DH001",
+        "loai": "trả hàng hoàn tiền",
+        "ly_do": "sản phẩm bị lỗi",
+        "trang_thai": "Đang xử lý",
+        "ngay_tao": "2026-07-20",
+    },
+}
+_return_counter = 1
+
 
 
 # ============================================================
