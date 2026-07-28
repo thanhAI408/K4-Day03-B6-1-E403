@@ -64,3 +64,37 @@
 | Chatbot có tạo được yêu cầu đổi trả không? | ❌ Không — không có Tool |
 | Chatbot có bịa đặt thông tin không? | ⚠️ Có một phần — tư vấn chính sách mà không biết sản phẩm cụ thể |
 | Kết luận | **ReAct Agent VƯỢT TRỘI** — cần Tool để phục vụ khách hàng thực sự |
+
+---
+
+## 🧠 3. NHẬT KÝ VÒNG LẶP REACT AGENT (TRACE LOG THỰC TẾ)
+
+**Câu hỏi thực thi**: *"Đơn hàng DH001 của tôi đang ở đâu rồi?"*
+
+### 🔄 Chi tiết luồng Thought -> Action -> Observation:
+
+- 🔄 **Step 1/6**:
+  - 🧠 **Thought 1**: Khách hỏi về đơn hàng DH001. Tôi cần tra cứu trạng thái đơn hàng này.
+  - 🛠️ **Action 1**: `tra_cuu_don_hang['DH001']`
+  - 👁️ **Observation 1**: 
+    ```text
+    Đơn hàng DH001:
+    Trạng thái: Đã giao
+    Ngày đặt: 2026-07-15 | Ngày giao: 2026-07-18
+    Sản phẩm:
+      - Tai nghe Bluetooth X1 (x1) - 590,000 VNĐ
+    Tổng tiền: 590,000 VNĐ
+    ```
+
+- 🔄 **Step 2/6**:
+  - 🧠 **Thought 2**: Đơn đã giao. Khách muốn đổi trả, tôi cần kiểm tra điều kiện đổi trả.
+  - 🛠️ **Action 2**: `kiem_tra_dieu_kien_doi_tra['DH001']`
+  - 👁️ **Observation 2**: 
+    ```text
+    KHÔNG ĐỦ ĐIỀU KIỆN: Đã quá hạn đổi trả (hết hạn 2026-07-25).
+    ```
+
+- 🔄 **Step 3/6**:
+  - 🧠 **Thought 3**: Đã có đủ thông tin. Tổng hợp câu trả lời cho khách.
+  - 🏁 **Final Answer**: *"Đơn hàng DH001 của bạn đã giao thành công. Tôi đã kiểm tra điều kiện đổi trả — vui lòng xem kết quả phía trên để biết chi tiết."*
+
