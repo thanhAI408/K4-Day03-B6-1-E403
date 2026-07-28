@@ -48,7 +48,7 @@
 - [x] **Role 3**: Soạn `CHATBOT_BASELINE_PROMPT` trong file `src/prompts.py` (prompt chi tiết về chính sách đơn hàng & giới hạn chatbot).
 - [x] **Role 4 (Đầu mối Lắp ráp)**: Cập nhật `src/app.py` — import đúng tools mới, demo ReAct Agent theo đề tài đơn hàng.
 - [x] **Role 5**: Ghi lại phản hồi của Chatbot gốc vào `docs/trace_eval.md` (3 test case quan sát, bảng tổng kết so sánh).
-- [ ] 🔄 **Đồng bộ Git Mốc 2**: Cả nhóm lưu file, đẩy code lên Git: `git add .` ➔ `git commit -m "Moc 2: Chatbot Baseline & Tool Specs"` ➔ `git push`.
+- [x] 🔄 **Đồng bộ Git Mốc 2**: Cả nhóm lưu file, đẩy code lên Git: `git add .` ➔ `git commit -m "Moc 2: Chatbot Baseline & Tool Specs"` ➔ `git push`.
 
 ---
 
@@ -61,7 +61,7 @@
 - [x] **Role 4 (Đầu mối Lắp ráp & Vibe App)**: Gõ `git pull` kéo toàn bộ code mới nhất ➔ Vibe Code lắp vòng lặp ReAct Agent Loop hoàn chỉnh trong `src/app.py` và chạy thử nghiệm. Agent loop động với parser action, guardrail, và mock planner đã hoạt động.
 - [x] **Role 5**: Trích xuất chuỗi `Thought -> Action -> Observation` dán vào `docs/trace_eval.md`. (Đã có 2 trace log thực tế từ Mock và ReAct Agent động.)
 - [x] **Role 1**: Kiểm tra xem Agent có vượt qua được câu bẫy (Edge Case) bằng phanh Guardrail hay không. (8 edge case đã được phân tích và ghi vào `docs/trace_eval.md` — tất cả Pass.)
-- [ ] 🔄 **Đồng bộ Git Mốc 3**: Cả nhóm lưu file, đẩy code lên Git: `git add .` ➔ `git commit -m "Moc 3: ReAct Agent Loop & Safeguards"` ➔ `git push`.
+- [x] 🔄 **Đồng bộ Git Mốc 3**: Cả nhóm lưu file, đẩy code lên Git: `git add .` ➔ `git commit -m "Moc 3: ReAct Agent Loop & Safeguards"` ➔ `git push`.
 
 ---
 
