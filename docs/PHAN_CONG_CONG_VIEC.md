@@ -74,8 +74,13 @@
 > * 🎲 **Hình thức 1 (Gọi ngẫu nhiên)**: Giảng viên gọi ngẫu nhiên một thành viên đại diện trong bất kỳ nhóm nào lên trình chiếu App, phản biện và trả lời câu hỏi bẫy từ các nhóm khác.
 > * 🔄 **Hình thức 2 (Chấm chéo nhóm)**: Giảng viên chỉ định 1 bạn đại diện (VD: Role 1 hoặc Role 5) đi sang nhóm khác để "tấn công" (dùng câu bẫy thử nghiệm Agent nhóm bạn) và chấm điểm chéo.
 
+<<<<<<< HEAD
 - [x] ⚔️ **Đội Tấn Công (Đại diện/Học viên được gọi)**: Mang các câu test case của nhóm mình sang "xả" vào Agent của Nhóm bạn để kiểm thử khả năng chịu lỗi. (Đã có 4 câu bẫy hiểm hóc trong `docs/MOC_4_PHONG_THU_TAN_CONG.md`).
 - [x] 🛡️ **Đội Phòng Thủ**: Quan sát Agent nhóm mình phản ứng trước câu hỏi của nhóm bạn. Kiểm tra xem Guardrail bảo vệ an toàn không. (Đã chuẩn bị 4 kịch bản phản biện bảo vệ Agent trong `docs/MOC_4_PHONG_THU_TAN_CONG.md`).
+=======
+- [ ] ⚔️ **Đội Tấn Công (Đại diện/Học viên được gọi)**: Mang các câu test case của nhóm mình sang "xả" vào Agent của Nhóm bạn để kiểm thử khả năng chịu lỗi.
+- [ ] 🛡️ **Đội Phòng Thủ**: Quan sát Agent nhóm mình phản ứng trước câu hỏi của nhóm bạn. Kiểm tra xem Guardrail bảo vệ an toàn không.
+>>>>>>> 075ad822700283a26fbe77da9793e65885c7ca81
 - [x] 📊 **Role 5B (hoặc Role 5)**: Vẽ sơ đồ **Hybrid Flowchart** vào file `docs/hybrid_flowchart.mermaid` thể hiện phân luồng:
   - Câu hỏi đơn giản ➔ Đi đường Chatbot path.
   - Câu hỏi phức tạp ➔ Đi đường ReAct Agent path.
