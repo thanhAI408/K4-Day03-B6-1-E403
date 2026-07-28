@@ -1,0 +1,28 @@
+flowchart TD
+    A[Người dùng gửi câu hỏi] --> B{"Cần dữ liệu thực tế<br/>hoặc thực hiện nhiều bước?"}
+
+    B -->|Không| C[Chatbot Baseline]
+    C --> C1[Trả lời từ chính sách/kiến thức cấu hình]
+    C1 --> Z[Phản hồi an toàn cho người dùng]
+
+    B -->|Có| D[ReAct Agent]
+    D --> E[Thought: xác định dữ liệu hoặc bước tiếp theo]
+    E --> F{Action có hợp lệ?}
+
+    F -->|Không| G["Guardrail từ chối<br/>tool không tồn tại, lặp action,<br/>thiếu tham số hoặc thiếu xác nhận"]
+    G --> Z
+
+    F -->|Có| H[Gọi Tool đã đăng ký]
+    H --> I[Observation: nhận kết quả thực tế]
+    I --> J{Đã đủ bằng chứng để trả lời?}
+
+    J -->|Chưa| K{Còn lượt xử lý?}
+    K -->|Có| E
+    K -->|Không| L["Safe fallback:<br/>dừng tại MAX_ITERATIONS"]
+    L --> Z
+
+    J -->|Rồi| M{"Có side effect<br/>hoặc thao tác nhạy cảm?"}
+    M -->|Có, chưa xác nhận| N[Yêu cầu người dùng xác nhận]
+    N --> Z
+    M -->|Không hoặc đã xác nhận| O[Final Answer dựa trên Observation]
+    O --> Z
